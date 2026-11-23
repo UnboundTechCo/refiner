@@ -24,9 +24,11 @@ jobs:
           go build -o xsr ./cmd/xraysubrefiner
 
       - name: Run
+        env:
+          XRAY_SUBREFINER_CONFIG: ${{ vars.XRAY_SUBREFINER_CONFIG }}
         run: |
           mkdir -p ./export
-          ./xsr -config config.yaml -out export
+          ./xsr -out export
 
       - name: Commit & push changes
         env:
